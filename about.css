@@ -1,0 +1,11 @@
+h1{
+    text-align: center;
+}
+
+/* WhiteSpace includes Headers and Form */
+.about-us-text{
+    margin-top: 5%;
+    margin-left:15%;
+    margin-right:15%;
+    margin-bottom:5%;
+}

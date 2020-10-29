@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<!--This is the home page for cimapp.com-->
+
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Basic|Slabo+27px" rel="stylesheet">
+
+    <!--Navbar imports-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- map leaflet imports-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    integrity= "sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin="" /> 
+
+    <link rel="stylesheet" href="form.css" type="text/css" />
+    <script src="form.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C.I.M.A.- form</title> 
+</head>
+
+<body>
+<!--Navigation Bar-->
+<!--style sheet is imported from internet, so check regularly if ever changed
+    https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_navbar_collapse-->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>                        
+            </button>
+            <img src="marshallLogo.png" class="navbar-brand">
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="index.html">Fill out a Form</a></li>
+                <li><a href="map.php">View Nearby Reports</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      
+  <div class="sidebar">
+
+    <!--Area for form to be created on-->
+    <div class="form-area">
+
+        <!--Form headers-->
+        <h1 id="main-title">On-Site Infrastructure Damage Report</h1>
+        <h3 id="subtitle">Welcome to C.I.M.A! Please report any infrastructure damage here.</h3>
+        
+        <!--start of form-->
+        <form onsubmit="finalizeForm()" method="post" action="form-submit.php">
+
+            
+
+            <!--Get email from user; save to 'user-email'-->
+            <div id="text-response">
+                <label for="user-email" id="question-label">Email</em></label>
+                <div>
+                <input type="email" name="user-email" placeholder="example@marshall.edu" maxlength="40" required>
+                </div>
+            </div>
+
+            <!--date and time will be obtained when form is sumbitted
+                will be saved to invisble text fields report-(time,day,month,year)-->
+            <input type="text" name="report-hours" id="report-hours" style="display:none">
+            <input type="text" name="report-mins" id="report-mins" style="display:none">
+            <input type="text" name="report-day" id="report-day" style="display:none">
+            <input type="text" name="report-month" id="report-month" style="display:none">
+            <input type="text" name="report-year" id="report-year" style="display:none">
+
+            <!--Ask if issue is a safety issue; save to safety-issue-->
+            <div id="radio-response">
+                <label for="safety-issue" id="question-label">Is this a safety issue?</label>
+                <div>
+                <input type="radio" name="safety-issue" value="Y" required>
+                <label for="safety-issue" id="radio-button-label">Yes</label>
+                </div>
+                <div>
+                <input type="radio" name="safety-issue" value="N" required>
+                <label for="safety-issue" id="radio-button-label">No</label>
+                </div>
+            </div>
+
+            <!--Ask what structure this is about; save to tree0-->
+            <div id="radio-response">
+                <label for="tree0" name="tree0-label" id="question-label">What is the issue related to?</label>
+                <div>
+                <input type="radio" name="tree0" onclick="showTree1(this)" value="0" required>
+                <label for="tree0" name="tree0-label" id="radio-button-label">Sign/Signal</label>
+                </div>
+                <div>
+                <input type="radio" name="tree0" onclick="showTree1(this)" value="1" required>
+                <label for="tree0" name="tree0-label" id="radio-button-label">Sidewalk</label>
+                </div>
+                <div>
+                <input type="radio" name="tree0" onclick="showTree1(this)" value="2" required>
+                <label for="tree0" name="tree0-label" id="radio-button-label">Parking Lot</label>
+                </div>
+                <div>
+                <input type="radio" name="tree0" onclick="showTree1(this)" value="3" required>
+                <label for="tree0" name="tree0-label" id="radio-button-label">Building</label>
+                </div>
+                <div>
+                <input type="radio" name="tree0" onclick="showTree1(this)" value="4" required>
+                <label for="tree0" name="tree0-label" id="radio-button-label">Parking Garage</label>
+                </div>
+                <div>
+                <input type="radio" name="tree0" onclick="showTree1(this)" value="5" required>
+                <label for="tree0" name="tree0-label" id="radio-button-label">Pedestrian Bridge</label>
+                </div>
+                <div>
+                <input type="radio" name="tree0" onclick="showTree1(this)" value="6" required>
+                <label for="tree0" name="tree0-label" id="radio-button-label">Roadway</label>
+                </div>
+                <div>
+                <input type="radio" name="tree0" onclick="showTree1(this)" value="7" required>
+                <label for="tree0" name="tree0-label" id="radio-button-label">Other</label>
+                </div>
+                </div>
+
+            <!--this question is generated in form.js
+                Ask what the general issue is; save to tree1-->
+            <div id="tree1-question" style="display:none">
+                <div id="radio-response">
+                    <label for="tree1" name="tree1-label" id="question-label"></label>
+                    <div>
+                    <input type="radio" name="tree1" onclick="showTree2(this)" id="tree1-op0" value="0">
+                    <label for="tree1" name="tree1-label" id="radio-button-label"></label>
+                </div>
+                <div>
+                    <input type="radio" name="tree1" onclick="showTree2(this)"  id="tree1-op1" value="1">
+                    <label for="tree1" name="tree1-label" id="radio-button-label"></label>
+                </div>
+                <div>
+                    <input type="radio" name="tree1" onclick="showTree2(this)" id="tree1-op2" value="2">
+                    <label for="tree1" name="tree1-label" id="radio-button-label"></label>
+                </div>
+                <div>
+                    <input type="radio" name="tree1" onclick="showTree2(this)" id="tree1-op3" value="3">
+                    <label for="tree1" name="tree1-label" id="radio-button-label"></label>
+                </div>
+                <div>
+                    <input type="radio" name="tree1" onclick="showTree2(this)" id="tree1-op4" value="4">
+                    <label for="tree1" name="tree1-label" id="radio-button-label"></label>
+                </div>
+                <div>
+                    <input type="radio" name="tree1" onclick="showTree2(this)" id="tree1-op5" value="5">
+                    <label for="tree1" name="tree1-label" id="radio-button-label"></label>
+                </div>
+                <div>
+                    <input type="radio" name="tree1" onclick="showTree2(this)" id="tree1-op6" value="6">
+                    <label for="tree1" name="tree1-label" id="radio-button-label"></label>
+                </div>
+                </div>
+                
+            </div>
+
+            <!--tree2 can be checkboxes, so maky values can be saved
+                invisible text input tree1-all will save all the values in a string-->
+                <input type="text" name="tree1-final" id="tree1-final" style="display:none">
+
+            <!--this question is generated in form.js
+                Ask what the specific issue is; save to tree2-->
+            <div id="tree2-question" style="display:none">
+                <div id="radio-response">
+                    <label for="tree2" name="tree2-label" id="question-label"></label>
+                    <div>
+                    <input type="radio" name="tree2" id="tree2-op0" value="0">
+                    <label for="tree2" name="tree2-label" id="radio-button-label"></label>
+                </div>
+                <div>
+                    <input type="radio" name="tree2" id="tree2-op1" value="1">
+                    <label for="tree2" name="tree2-label" id="radio-button-label"></label>
+                </div>
+                <div>
+                    <input type="radio" name="tree2" id="tree2-op2" value="2">
+                    <label for="tree2" name="tree2-label" id="radio-button-label"></label>
+                </div>
+                <div>
+                    <input type="radio" name="tree2" id="tree2-op3" value="3">
+                    <label for="tree2" name="tree2-label" id="radio-button-label"></label>
+                </div>
+                <div>
+                    <input type="radio" name="tree2" id="tree2-op4" value="4">
+                    <label for="tree2" name="tree2-label" id="radio-button-label"></label>
+                </div>
+                <div>
+                    <input type="radio" name="tree2" id="tree2-op5" value="5">
+                    <label for="tree2" name="tree2-label" id="radio-button-label"></label>
+                </div>
+                <div>
+                    <input type="radio" name="tree2" id="tree2-op6" value="6">
+                   <label for="tree2" name="tree2-label" id="radio-button-label"></label>
+                </div> 
+                </div>
+            </div>
+
+            <!--tree2 can be checkboxes, so maky values can be saved
+                invisible text input tree2-all will save all the values in a string
+                also, tree2-all can be empty if user picks nothing-->
+            <input type="text" name="tree2-final" id="tree2-final" style="display:none">
+
+            <!--give users option for 1-5 star rating of damage; saved to user-rating-->
+           
+            <div id="star-response" style="display:none">
+                <div id="radio-response"><!--for css-->
+                <label for="user-rating" id="question-label">Rate the impact of the issue. (1-5)</label>
+                <div id="stars">
+                <input type="radio" name="user-rating" id="star-def" value="" style="display: none">
+                <input type="radio" name="user-rating" id="star1" value="1">
+                <input type="radio" name="user-rating" id="star2" value="2">
+                <input type="radio" name="user-rating" id="star3" value="3">
+                <input type="radio" name="user-rating" id="star4" value="4">
+                <input type="radio" name="user-rating" id="star5" value="5">
+                </div>
+            </div>
+            </div>
+      
+
+
+            <!--allow user to write a comment; save to user-explain-->
+            <div id="textarea-response">
+                <label for="user-explain" id="question-label">Provide any specific details regarding location, damage, etc.</label>
+                <label for="user-explain" id="characters-left"><em>(300 characters remaining)</em></label>
+                <textarea name="user-explain" id="user-explain" maxlength="300"></textarea>
+
+                <!--script displays how many characters user has left-->
+                <script>
+                    const textarea = document.querySelector("textarea");
+                    textarea.addEventListener("input", event => {
+                        const target = event.currentTarget;
+                        const maxLength = target.getAttribute("maxlength");
+                        const currentLength = target.value.length;
+                        document.getElementById("characters-left").innerHTML = `<em>(${maxLength - currentLength} characters remaining)</em>`;
+                    });
+                </script>
+                
+            </div>
+
+            <!--get location from user; save to user-location-->
+            <div id="location-response">
+                
+                <label for="user-location" id="question-label">Provide the location of the report.</label>
+                <input type="text" name="user-latitude" id="user-latitude" value="" style="display:none">
+                <input type="text" name="user-longitude" id="user-longitude" value="" style="display:none">
+                <div>
+                <input type="button" id="map-button" value="Get Location" onclick="getPosition()">
+                <div>
+                <label for="user-location" id="no-location" style="display:none"></label> <!--diaplayed if no location info-->
+                </div>
+                <!--area to create open street map-->
+                <!-- Specify the map and it's dimensions -->
+                
+                <div id="map"></div> 
+                
+                <!-- Get the leaflet JavaScript file
+                    notice that this is done before the map is initialized in getLocation() -->
+                <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+                integrity= 
+                "sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+                crossorigin=""></script> 
+                </div>
+            </div>
+
+            <!--get image from user; save to report-image-->
+            <div id="image-response">
+                <label for="image-response" id="question-label">Provide an image (PNG or JPEG) of the issue</label>
+                
+                <div>
+                <input type="file" accept=".png,.jpg" name="report-image">
+            </div>
+            </div>
+
+            <!--Provide button to submit form-->
+            <div id="submit-form">
+                <input type="submit" id="submit-button" value="Submit">
+            </div>
+             
+
+        </form>
+
+        <!--get user location on start up; save to user-latitude and user-longitude-->
+        <script>getPosition();</script>
+
+    </div>
+</div>
+
+</body>
+
+</html>
