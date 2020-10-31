@@ -1,9 +1,9 @@
 <?php
 //database information
-$host = "localhost";
-$dbUsername = "root";
-$dbPassword = "";
-$dbName = "cima_db2.0";
+$host = "db-mysql-nyc1-94769-do-user-6455275-0.b.db.ondigitalocean.com";
+$dbUsername = "doadmin";
+$dbPassword = "uscoy72zbho7mbjh";
+$dbName = "cima_reports";
 
 // Create connection
 $conn = new mysqli($host, $dbUsername, $dbPassword, $dbName);
